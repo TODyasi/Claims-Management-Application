@@ -1,0 +1,138 @@
+﻿<Page x:Class="CMCS.Design.Wpf.Draft.ReviewerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ReviewerViewPage">
+
+    <Page.Resources>
+        <!-- Primary Button Style -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#3B82F6"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Border.CornerRadius" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="12,8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Sidebar Button Style -->
+        <Style x:Key="SidebarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#1E3A8A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Border.CornerRadius" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="12,8">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- Hover Effect -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#344953"/>
+                    <Setter Property="BorderBrush" Value="#4A5B6A"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="#f5f5f5">
+        <!-- Define Rows and Columns -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Section 1: Navbar -->
+        <DockPanel Background="#1A237E" Height="70" Grid.Row="0" Grid.ColumnSpan="2" LastChildFill="True">
+            <!-- Logo -->
+            <Image Source="C:\Users\RC_Student_lab\source\repos\CMCS.Design.Wpf.Draft\Images\CMCS_Logo.png"
+                   Height="50" Width="150"
+                   VerticalAlignment="Center" DockPanel.Dock="Left"
+                   Margin="15"/>
+
+            <!-- Navigation Links -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,15,0">
+                <!-- Home Link -->
+                <Button Content="Home" Padding="12,8" Margin="5" Click="Home_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                <!-- Conditional Navigation Links -->
+                <Button x:Name="SubmitClaimsButton" Content="Submit Claims" Padding="12,8" Margin="5" Visibility="Collapsed" Click="SubmitClaims_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+                <Button x:Name="ReviewClaimsButton" Content="Review Claims" Padding="12,8" Margin="5" Visibility="Collapsed" Click="ReviewClaims_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                <!-- Upload Document Link -->
+                <Button Content="Upload Document" Padding="12,8" Margin="5" Click="UploadDocument_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                <!-- Profile Link -->
+                <Button Content="Profile" Padding="12,8" Margin="5" Click="Profile_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                <!-- Help/Support Link -->
+                <Button Content="Help/Support" Padding="12,8" Margin="5" Click="HelpSupport_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                <!-- Logout/Log In Link -->
+                <Button x:Name="LogoutButton" Content="Logout" Padding="12,8" Margin="5" Click="Logout_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+                <Button x:Name="LoginButton" Content="Log In" Padding="12,8" Margin="5" Visibility="Collapsed" Click="Login_Click"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Section 2: Sidebar for Reviewer Options -->
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Background="#1E3A8A" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Button Content="View Claims" Tag="ViewClaims" Click="ViewClaims_Click"
+                    Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Content="Update Claims" Tag="UpdateClaims" Click="UpdateClaims_Click"
+                    Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Content="Review Details" Tag="ReviewDetails" Click="ReviewDetails_Click"
+                    Style="{StaticResource SidebarButtonStyle}"/>
+            <Button Content="Generate Report" Tag="GenerateReport" Click="GenerateReport_Click"
+                    Style="{StaticResource SidebarButtonStyle}"/>
+        </StackPanel>
+
+        <!-- Section 3: Main Content Area -->
+        <ContentControl x:Name="MainContent" Grid.Row="1" Grid.Column="1" Margin="20" Background="#FFFFFF" Foreground="#111111" Padding="20"/>
+    </Grid>
+</Page>
