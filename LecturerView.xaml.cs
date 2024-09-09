@@ -27,9 +27,8 @@ namespace CMCS.Design.Wpf.Draft
         }
         private void InitializeNavbar()
         {
-            // Example role check. Replace with your actual logic.
-            bool isLecturer = true; // This should be dynamically determined
-            bool isLoggedIn = true; // This should be dynamically determined
+            bool isLecturer = true; 
+            bool isLoggedIn = true; 
 
             SubmitClaimsButton.Visibility = isLecturer ? Visibility.Visible : Visibility.Collapsed;
             ReviewClaimsButton.Visibility = isLecturer ? Visibility.Collapsed : Visibility.Visible;
